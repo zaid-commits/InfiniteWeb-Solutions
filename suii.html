@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InfiniteWeb Solutions</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://zaid@infinitewebsolution.in/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://zaid@infinitewebsolution.in/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+        @import url('https://zaid@infinitewebsolution.in/css2?family=Poppins:wght@300;400;600;700&display=swap');
+    
+        :root {
+            --primary: #6366f1;
+            --secondary: #4f46e5;
+            --accent: #8b5cf6;
+            --background: #111827;
+            --text: #f3f4f6;
+            --text-light: #9ca3af;
+        }
+    
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+        }
+    
+        .primary-bg { background-color: var(--primary); }
+        .secondary-bg { background-color: var(--secondary); }
+        .accent-bg { background-color: var(--accent); }
+        .primary-text { color: var(--primary); }
+        .secondary-text { color: var(--secondary); }
+        .accent-text { color: var(--accent); }
+    
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #1f2937;
+        }
+    
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+        }
+    
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+    
+        .image-grid img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+    
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fadeInLeft {
+            animation: fadeInLeft 0.8s ease forwards;
+        }
+
+        .animate-fadeInRight {
+            animation: fadeInRight 0.8s ease forwards;
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .animate-fadeInDown {
+            animation: fadeInDown 0.8s ease forwards;
+        }
+
+        .animate-fadeInLeft, .animate-fadeInRight, .animate-fadeInUp, .animate-fadeInDown {
+            opacity: 0;
+        }
+    
+        /* Dark theme adjustments */
+        .bg-white {
+            background-color: #1f2937;
+        }
+    
+        .text-gray-600 {
+            color: #d1d5db;
+        }
+    
+        .text-gray-700 {
+            color: #e5e7eb;
+        }
+    
+        .border-gray-300 {
+            border-color: #4b5563;
+        }
+    
+        input, textarea {
+            background-color: #374151;
+            color: #f3f4f6;
+        }
+    
+        input::placeholder, textarea::placeholder {
+            color: #9ca3af;
+        }
+    
+        .bg-gray-100 {
+            background-color: #111827;
+        }
+    
+        .shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+  </head>
+  <body class="antialiased">
+    <!-- Header -->
+    <header class="fixed w-full z-50 bg-white shadow-md">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <a href="#" class="text-2xl font-bold primary-text">InfiniteWeb Solutions</a>
+          <nav class="hidden md:flex space-x-8">
+            <a
+            href="#services"
+            class="hover:text-indigo-600 transition duration-300"
+            >Services</a
+        </a>
+        <a
+            href="#about"
+            class="hover:text-indigo-600 transition duration-300"
+            >About</a
+      </a>
+          <a
+            href="#portfolio"
+            class="hover:text-indigo-600 transition duration-300"
+            >Portfolio
+          </a><a
+            href="#contact"
+            class="hover:text-indigo-600 transition duration-300"
+            >Contact
+          </a>
+          </nav>
+          <button
+            class="md:hidden text-gray-600 focus:outline-none"
+            id="mobile-menu-button"
+          >
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Menu -->
+      <div class="md:hidden hidden" id="mobile-menu">
+        <nav class="flex flex-col items-center py-4 bg-white">
+                      <a
+              href="#services"
+              class="hover:text-indigo-600 transition duration-300"
+              >Services</a
+          </a>
+          <a
+              href="#about"
+              class="hover:text-indigo-600 transition duration-300"
+              >About</a
+        </a>
+            <a
+              href="#portfolio"
+              class="hover:text-indigo-600 transition duration-300"
+              >Portfolio
+            </a><a
+              href="#contact"
+              class="hover:text-indigo-600 transition duration-300"
+              >Contact
+            </a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section
+      class="min-h-screen flex items-center justify-center pt-20 px-4 bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800"
+    >
+      <div class="text-center text-white">
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fadeInUp">
+          InfiniteWeb Solutions Solutions
+        </h1>
+        <p class="text-xl mb-12 max-w-2xl mx-auto animate-fadeInUp">
+          Empowering businesses with cutting-edge technology and creative
+          strategies.
+        </p>
+        <a
+          href="#contact"
+          class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-indigo-700 transition duration-300 animate-fadeInUp"
+          >Get Started</a>
+      </div>
+    </section>
+    <!-- Services Section -->
+    <section id="services" class="py-20 px-4">
+      <div class="container mx-auto">
+        <h2 class="text-4xl font-bold mb-16 text-center">Our Services</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div class="card bg-white p-8 rounded-lg shadow-lg">
+            <i class="fas fa-code text-5xl mb-6 primary-text"></i>
+            <h3 class="text-2xl font-bold mb-4">Web Development</h3>
+            <p class="text-gray-600">
+              Custom websites tailored to your unique business needs, built with
+              the latest technologies.
+            </p>
+          </div>
+          <div class="card bg-white p-8 rounded-lg shadow-lg">
+            <i class="fas fa-mobile-alt text-5xl mb-6 primary-text"></i>
+            <h3 class="text-2xl font-bold mb-4">Mobile Apps</h3>
+            <p class="text-gray-600">
+              Intuitive and powerful mobile applications for iOS and Android
+              platforms.
+            </p>
+          </div>
+          <div class="card bg-white p-8 rounded-lg shadow-lg">
+            <i class="fas fa-search text-5xl mb-6 primary-text"></i>
+            <h3 class="text-2xl font-bold mb-4">SEO Optimization</h3>
+            <p class="text-gray-600">
+              Boost your online visibility and reach your target audience with
+              our expert SEO strategies.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 px-4 bg-gray-100">
+      <div class="container mx-auto">
+        <h2 class="text-4xl font-bold mb-16 text-center">Our Work</h2>
+        <div class="image-grid">
+          <img
+            src="https://zaid@infinitewebsolution.in/600x400/?website"
+            alt="Project 1"
+            class="shadow-lg"
+          />
+          <img
+            src="https://zaid@infinitewebsolution.in/600x400/?app"
+            alt="Project 2"
+            class="shadow-lg"
+          />
+          <img
+            src="https://zaid@infinitewebsolution.in/600x400/?design"
+            alt="Project 3"
+            class="shadow-lg"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4">
+      <div class="container mx-auto">
+        <h2 class="text-4xl font-bold mb-16 text-center">About Us</h2>
+        <div class="flex flex-wrap items-center">
+          <div class="w-full md:w-1/2 mb-12 md:mb-0 pr-0 md:pr-8">
+            <h3 class="text-3xl font-bold mb-6">Passionate About Innovation</h3>
+            <p class="text-gray-600 mb-6">
+              At InfiniteWeb Solutions, we're driven by a passion for technology and
+              innovation. Our team of expert developers, designers, and
+              strategists work tirelessly to deliver cutting-edge solutions that
+              help our clients thrive in the digital landscape.
+            </p>
+            
+              href="#contact"
+              class="primary-bg text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-indigo-700 transition duration-300 inline-block"
+              >Work With Us</a
+            >
+          </div>
+          <div class="w-full md:w-1/2">
+            <img
+              src="old.jpg"
+              alt="Our Team"
+              class="rounded-full shadow-xl"
+              style="max-width: 70%; padding-right: 5%;" 
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 bg-gray-100">
+      <div class="container mx-auto">
+        <h2 class="text-4xl font-bold mb-16 text-center">Get in Touch</h2>
+        <div class="flex flex-wrap -mx-4">
+          <div class="w-full md:w-1/2 px-4 mb-12 md:mb-0">
+            <form class="bg-white p-8 rounded-lg shadow-lg">
+              <div class="mb-6">
+                <label
+                  for="name"
+                  class="block mb-2 text-sm font-medium text-gray-700"
+                  >Name</label
+                >
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                  required
+                />
+              </div>
+              <div class="mb-6">
+                <label
+                  for="email"
+                  class="block mb-2 text-sm font-medium text-gray-700"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                  required
+                />
+              </div>
+              <div class="mb-6">
+                <label
+                  for="message"
+                  class="block mb-2 text-sm font-medium text-gray-700"
+                  >Message</label
+                >
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                  required
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="primary-bg text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-indigo-700 transition duration-300 w-full"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+          <div class="w-full md:w-1/2 px-4">
+            <div
+              class="bg-white p-8 rounded-lg shadow-lg h-full flex flex-col justify-between"
+            >
+              <div>
+                <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                <p class="mb-4">
+                  <i class="fas fa-map-marker-alt mr-2 primary-text"></i> 123
+                  Innovation Ave, Tech City, 12345
+                </p>
+                <p class="mb-4">
+                  <i class="fas fa-phone mr-2 primary-text"></i> +1 (555)
+                  123-4567
+                </p>
+                <p class="mb-4">
+                  <i class="fas fa-envelope mr-2 primary-text"></i>
+                  zaid@infinitewebsolution.in
+                </p>
+              </div>
+              <div>
+                <h4 class="text-xl font-bold mb-4">Follow Us</h4>
+                <div class="flex space-x-4"> <a href="#"
+                    class="text-2xl hover:text-indigo-600 transition duration-300"
+                    ><i class="fab fa-facebook"></i
+                  ></a>
+                  
+                    <a href="#"
+                    class="text-2xl hover:text-indigo-600 transition duration-300"
+                    ><i class="fab fa-twitter"></i
+                  ></a>
+                  
+                    <a href="#"
+                    class="text-2xl hover:text-indigo-600 transition duration-300"
+                    ><i class="fab fa-linkedin"></i
+                  ></a>
+                  
+                    <a href="#"
+                    class="text-2xl hover:text-indigo-600 transition duration-300"
+                    ><i class="fab fa-instagram"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-12 text-white transition duration-300">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-wrap justify-between items-center">
+          <div class="w-full md:w-1/3 mb-8 md:mb-0">
+            <h3 class="text-2xl font-bold mb-4">InfiniteWeb Solutions</h3>
+            <p class="text-gray-400">
+              Empowering businesses with innovative digital solutions.
+            </p>
+          </div>
+          <div class="w-full md:w-1/3 mb-8 md:mb-0">
+            <h4 class="text-xl font-bold mb-4">Quick Links</h4>
+            <ul class="space-y-2">
+              <li>
+                <a
+              href="#services"
+              class="hover:text-indigo-600 transition duration-300"
+              >Services</a
+          
+                >
+              </li>
+              <li>
+                
+              </a>
+              <a
+                  href="#about"
+                  class="hover:text-indigo-600 transition duration-300"
+                  >About</a
+            </a>
+                
+              </li>
+              <li>
+                <a
+                  href="#portfolio"
+                  class="hover:text-indigo-600 transition duration-300"
+                  >Portfolio
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  class="hover:text-indigo-600 transition duration-300"
+                  >Contact
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="w-full md:w-1/3">
+            <h4 class="text-xl font-bold mb-4">Newsletter</h4>
+            <form class="flex">
+              <input
+                type="email"
+                placeholder="Your email"
+                class="p-2 rounded-l w-full focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                required
+              />
+              <button
+                type="submit"
+                class="primary-bg text-white font-bold py-2 px-4 rounded-r hover:bg-indigo-700 transition duration-300"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="mt-12 pt-8 border-t border-gray-700 text-center">
+          <p class="text-gray-400">
+            &copy; 2024 InfiniteWeb Solutions. All rights reserved.
+          </p>
+          <div class="mt-4">
+            <a
+              href="#"
+              class="text-sm text-gray-400 hover:text-white transition duration-300 mr-4"
+              >Privacy Policy</a
+            >
+            <a
+              href="#"
+              class="text-sm text-gray-400 hover:text-white transition duration-300"
+              >Terms of Service</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      const mobileMenuButton = document.getElementById("mobile-menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      mobileMenuButton.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+
+      // Close mobile menu when clicking on a link
+      const mobileMenuLinks = mobileMenu.querySelectorAll("a");
+      mobileMenuLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden");
+        });
+      });
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+
+      // Intersection Observer for fade-in animations
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1,
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            let animationClass = 'animate-fadeInUp'; // Default animation
+
+            if (entry.target.tagName === 'H2') {
+              animationClass = 'animate-fadeInDown';
+            } else if (entry.target.classList.contains('card')) {
+              animationClass = entry.target.offsetLeft < window.innerWidth / 2 ? 'animate-fadeInLeft' : 'animate-fadeInRight';
+            }
+
+            entry.target.classList.add(animationClass);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll("section > div > *, .card").forEach((element) => {
+        observer.observe(element);
+      });
+
+      // Form submission
+      const form = document.querySelector("form");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("message").value;
+
+        if (name && email && message) {
+          // Here you would typically send the form data to a server
+          // For this example, we'll just log it to the console
+          console.log("Form submitted:", { name, email, message });
+          alert("Thank you for your message. We'll get back to you soon!");
+          form.reset();
+        } else {
+          alert("Please fill out all fields.");
+        }
+      });
+
+      // Parallax effect for hero section
+      window.addEventListener("scroll", () => {
+        const scrollPosition = window.pageYOffset;
+        const heroSection = document.querySelector("section:first-of-type");
+        heroSection.style.backgroundPositionY = scrollPosition * 0.7 + "px";
+      });
+    </script>
+  </body>
+</html>

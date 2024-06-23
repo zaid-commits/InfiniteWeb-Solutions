@@ -1,0 +1,12 @@
+body{
+    font: "Inter";
+    font-weight: 500;
+}
+.gradient-bg {
+    background: linear-gradient(135deg, #000000, #4a0e4e);
+}
+.text-gradient {
+    background: linear-gradient(135deg, #ffffff, #e0aaff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
